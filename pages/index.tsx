@@ -3,6 +3,7 @@ import Link from 'next/link'
 import Date from '../components/date'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.css'
+import { GetStaticProps } from 'next'
 import { getSortedPostsData } from '../lib/posts'
 
 function Home({ allPostsData, ipStuff }) {
@@ -35,7 +36,7 @@ function Home({ allPostsData, ipStuff }) {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async context => {
   const res = await fetch('http://api.ipstack.com/check?access_key=07b3ab0aa729c0d40db1f22462d4ab2d')
   const ipStuff = await res.json()
   const allPostsData = getSortedPostsData()
